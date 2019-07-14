@@ -2,7 +2,7 @@
 
 *Currently only works on Windows*
 
-A bot that grabs the hottest images from reddit and reposts them to instagram
+A bot that grabs the hottest images from reddit and reposts them to instagram (in 30min intervals)
 
 Change the values in 'instaLogin.txt' to your instagram login details (remember to use all lower-case for username)
 
