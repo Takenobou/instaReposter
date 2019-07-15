@@ -3,8 +3,11 @@
 *Currently only works on Windows*
 
 Requires:
-praw,
-instagramAPI,
+
+praw
+
+instagramAPI
+
 pillow
 
 A bot that grabs the hottest images from reddit and reposts them to instagram (in 30min intervals)
