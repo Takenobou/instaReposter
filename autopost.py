@@ -29,23 +29,31 @@ def instaLogin():
         os.chdir(ImagePath)
         return igapi
 
-
 def postIt():
         igapi = instaLogin()
         os.chdir(ImagePath)
         ListFiles = sorted([f for f in listdir(ImagePath) if isfile(join(ImagePath, f))])
         print(ListFiles)
-        print("Total number of photos in this folder:" + str(len(ListFiles)))
+        print("Total number of photos in this folder:" + str(len(ListFiles)))  
+        
+        
         for i, _ in enumerate(ListFiles):
                 photo = ListFiles[i]
                 print("----------------------------------------------------------")
                 print("Progress: " + str([i + 1]) + " of " + str(len(ListFiles)))
                 credit = os.path.splitext(photo)[0]
-                IGCaption = ("Originally posted by: /u/" + credit + " on Reddit" ".\n.\n.\n.\n.\n.\n.\n.\nTags:\n\n#meme #memes #dankmemes #funny #funnymemes #memesdaily #lol #edgymemes #dank #offensivememes #lmao #follow #like #bhfyp #humor #dankmeme #edgy #comedy #fun #instagram #cringe #offensive #sad #memestagram")
+                IGCaption = ("Originally posted by: /u/" + credit + " on Reddit" ".\n.\n.\n.\n.\n.\n.\n.\nTags:\n\n#meme #memes #dankmemes #funny #funnymemes #memesdaily #lol #edgymemes #dank #offensivememes #lmao #follow #like #bhfyp #humor #dankmeme #reddit #edgy #comedy #fun #instagram #cringe #offensive #sad #memestagram")
                 print("Now uploading this photo to Instagram: " + photo)
                 igapi.uploadPhoto(photo, caption=IGCaption, upload_id=None)
                 os.remove(photo)
-                timer()
+                if len(listdir(ImagePath)) == 0:
+                        print("Posting Halted")
+                        time.sleep(5)
+                        print("Posting restarted")
+                        main()
+                else:
+                        timer()
+                
 
 
 def timer():
@@ -56,9 +64,10 @@ def timer():
         sys.stdout.write("{:2d} seconds remaining to next upload.".format(remaining))
         sys.stdout.flush()
         time.sleep(1)
-        clear = lambda: os.system('cls')
-        clear()
+        #comment for debugging
+        #clear = lambda: os.system('cls')
+        #clear() #comment for debugging
 
 
 if __name__ == "__main__":
-    print ("autopost imported")
+    print ("Autopost imported")

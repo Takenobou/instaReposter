@@ -5,12 +5,20 @@ import picGrab
 import autopost
 from multiprocessing import Process
 
-d = os.getcwd()
-ImagePath = d + "\\Images"
+dir = os.getcwd()
+ImagePath = dir + "\\Images"
 def ensure_dir():
         if not os.path.isdir(ImagePath):
                 print("Creating image folder")
                 os.makedirs(ImagePath)
+
+
+def motherScript():
+    
+    Process(target=RedditImageGrab).start()
+    
+    Process(target=InstaPoster).start()
+
 
 # Instagram poster script
 def InstaPoster():
@@ -25,12 +33,16 @@ def RedditImageGrab():
         if len(dirContents) == 0:
             print('Image folder is empty')
             print("Repopulating now")
-            picGrab.main()       
+            start_time = time.time()
+            picGrab.main()
+            elapsed_time = time.time() - start_time      
+            print("Image folder repopulated")
+            print("Update took " + str(elapsed_time) + "s")
+    
+
         
 
 #multiprocessing the functions
 if __name__ == '__main__':
         ensure_dir()
-        Process(target=RedditImageGrab).start()
-        Process(target=InstaPoster).start()
-        
+        motherScript()
