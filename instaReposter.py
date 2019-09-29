@@ -13,11 +13,12 @@ def ensure_dir():
                 os.makedirs(ImagePath)
 
 
-def motherScript():
-    
-    Process(target=RedditImageGrab).start()
-    
-    Process(target=InstaPoster).start()
+def multiProcessor( processMode ):
+
+    if processMode == 1:
+        Process(target=InstaPoster).start()
+    elif processMode == 2:
+        Process(target=RedditImageGrab).start()
 
 
 # Instagram poster script
@@ -28,16 +29,15 @@ def InstaPoster():
 
 #Image grabber and file sorter
 def RedditImageGrab():
-    while True:
-        dirContents = os.listdir(ImagePath)
-        if len(dirContents) == 0:
-            print('Image folder is empty')
-            print("Repopulating now")
-            start_time = time.time()
-            picGrab.main()
-            elapsed_time = time.time() - start_time      
-            print("Image folder repopulated")
-            print("Update took " + str(elapsed_time) + "s")
+    #while True:
+        #dirContents = os.listdir(ImagePath)
+        #if len(dirContents) == 0:
+    print('Image folder is empty, repopulating now')
+    start_time = time.time()
+    picGrab.main()
+    elapsed_time = time.time() - start_time      
+    print("Image folder repopulated")
+    print("The update took " + str(elapsed_time) + "s")
     
 
         
@@ -45,4 +45,4 @@ def RedditImageGrab():
 #multiprocessing the functions
 if __name__ == '__main__':
         ensure_dir()
-        motherScript()
+        multiProcessor(1)
