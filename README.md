@@ -4,9 +4,9 @@
 
 Requires:
 
-praw
-instagramAPI
-pillow
+praw,
+instagramAPI,
+pillow,
 
 A bot that grabs the hottest images from reddit (default is r/memes) and reposts them to instagram (in 30min intervals)
 
