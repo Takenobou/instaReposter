@@ -2,7 +2,6 @@
 
 *Currently only works on Windows*
 
-*Python 3*
 
 Requires:
 
