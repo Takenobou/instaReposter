@@ -28,7 +28,6 @@ def instaLogin():
         f.close()
         igapi = InstagramAPI(igUser, igPassword)
         igapi.login()  # login
-        print("Logged into Instagram successfully")
         os.chdir(ImagePath)
         return igapi
 
@@ -60,24 +59,29 @@ def postIt():
                                 #image grab
                                 instaReposter.multiProcessor(2)
                                 time.sleep(10)
+                        
+                        
+
         except KeyboardInterrupt:
-                print("Program interrupted")
+                print("\nProgram interrupted")
                 pass          
 
         
 
 def timer():
-    n = randint(1400, 1800)
-    print("----------------------------------------------------------")
-    
+
+    n = randint(1800, 3600)
     for remaining in range(n, 0, -1):
+        print("----------------------------------------------------------")
         sys.stdout.write("\r")
         sys.stdout.write("{:2d} seconds remaining to next upload.".format(remaining))
         sys.stdout.flush()
+
         time.sleep(1)
         #comment for debugging
-        #clear = lambda: os.system('cls')
-        #clear() #comment for debugging
+        clear = lambda: os.system('cls')
+        clear() 
+        
 
 
 if __name__ == "__main__":

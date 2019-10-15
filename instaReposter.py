@@ -33,11 +33,11 @@ def RedditImageGrab():
         #dirContents = os.listdir(ImagePath)
         #if len(dirContents) == 0:
     print('Image folder is empty, repopulating now')
-    start_time = time.time()
+    #start_time = time.time()
     picGrab.main()
-    elapsed_time = time.time() - start_time      
+    #elapsed_time = time.time() - start_time      
     print("Image folder repopulated")
-    print("The update took " + str(elapsed_time) + "s")
+    #print("The update took " + str(elapsed_time) + "s")
     
 
         
