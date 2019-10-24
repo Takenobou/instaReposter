@@ -12,7 +12,6 @@ def ensure_dir():
                 print("Creating image folder")
                 os.makedirs(ImagePath)
 
-
 def multiProcessor( processMode ):
 
     if processMode == 1:
@@ -20,12 +19,10 @@ def multiProcessor( processMode ):
     elif processMode == 2:
         Process(target=RedditImageGrab).start()
 
-
 # Instagram poster script
 def InstaPoster():
         print("Posting Initiated")
         autopost.main()
-
 
 #Image grabber and file sorter
 def RedditImageGrab():
@@ -38,9 +35,6 @@ def RedditImageGrab():
     #elapsed_time = time.time() - start_time      
     print("Image folder repopulated")
     #print("The update took " + str(elapsed_time) + "s")
-    
-
-        
 
 #multiprocessing the functions
 if __name__ == '__main__':
