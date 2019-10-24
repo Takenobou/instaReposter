@@ -18,7 +18,6 @@ def main():
         print("Total number of photos in this folder:" + str(len(ListFiles)))
         postIt()
 
-
 def instaLogin():
 
         os.chdir("..")
@@ -31,12 +30,8 @@ def instaLogin():
         os.chdir(ImagePath)
         return igapi
 
-
-
 def postIt():
-
-        igapi = instaLogin()
-        
+        igapi = instaLogin()    
         try:
                 while True:
                         os.chdir(ImagePath)
@@ -59,17 +54,12 @@ def postIt():
                                 #image grab
                                 instaReposter.multiProcessor(2)
                                 time.sleep(10)
-                        
-                        
 
         except KeyboardInterrupt:
                 print("\nProgram interrupted")
                 pass          
 
-        
-
 def timer():
-
     n = randint(1800, 3600)
     for remaining in range(n, 0, -1):
         print("----------------------------------------------------------")
@@ -82,7 +72,5 @@ def timer():
         clear = lambda: os.system('cls')
         clear() 
         
-
-
 if __name__ == "__main__":
     print ("Autopost imported")
