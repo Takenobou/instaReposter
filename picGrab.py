@@ -25,7 +25,7 @@ def main():
         #ImagePath = d + "\\Images" #image path
         hot_python = subreddit.hot(limit= 11) #amount of images to be downloaded (limit + 1 sticky)
 
-        with open("C:\\Users\\alexm\\Documents\\AutoInsta\\lastimageindex.txt", "a") as file:      
+        with open("..\\lastimageindex.txt", "a") as file:      
             file.write("\n\n")
         
 
