@@ -7,7 +7,6 @@ from PIL import Image
 
 #reddit image grabber and prepper
 
-
 def main():
 
         clID = ""
@@ -27,7 +26,6 @@ def main():
 
         with open("..\\lastimageindex.txt", "a") as file:      
             file.write("\n\n")
-        
 
         for submission in hot_python:
             if not submission.stickied and not submission.over_18:
@@ -68,7 +66,6 @@ def main():
                         elif imgRatio > 1 and imgRatio < 1.1:
                             #Square
                             imagePrep(3, imageName)
-
 
                 #appending
                 if newImage == True:
@@ -113,14 +110,6 @@ def imagePrep(imageType, imageName):
     #composing final image
     background.paste(img, offset)
     background.save(ImagePath + "\\" + imageName + '.jpg')
-
-                 
-                
-
-
-
-
-
 
 if __name__ == "__main__":
     print("PicGrab imported")
