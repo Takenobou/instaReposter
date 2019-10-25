@@ -1,6 +1,6 @@
 # instaReposter
 
-## Support for Linux and Windows
+### Support for Linux and Windows
 
 A bot that grabs the hottest images from reddit (default is r/memes) and reposts them to instagram (in a random 30-60min interval)
 
