@@ -1,16 +1,41 @@
 # instaReposter
 
-*Currently only works on Windows*
-
-
-Requires:
-
-praw,
-instagramAPI,
-pillow,
+Support for Linux and Windows
 
 A bot that grabs the hottest images from reddit (default is r/memes) and reposts them to instagram (in a random 30-60min interval)
 
-Change the values in 'instaLogin.txt' to your instagram login details (remember to use all lower-case for username)
+**Pre-Requesites:**
 
-Change the variables (clID,clSE,User,Password) inside the speech marks (lines 12-15) to your reddit bot credentials in 'picGrab.py'.
+- An Instagram account
+- A Reddit bot account with an [app] (https://old.reddit.com/prefs/apps/) created 
+- Python 3
+
+
+***Instructions:***
+
+1. Use Pip to install the required APIs
+
+*Recommended:*
+
+  ```pip install -r requirements.txt```
+
+Manual:
+
+  PRAW ([Reddit API] (https://github.com/praw-dev/praw)):
+    ```pip install praw```
+
+  InstagramAPI ([Instagram API](https://github.com/LevPasha/Instagram-API-python)):
+    ```pip install InstagramAPI```
+
+  pillow (PIL)
+    ```pip install pillow```
+
+2. Login
+  - In instaLogin.txt change Username to your Instagram username
+  - In picGrab.py change clID to your app client ID, clSE to your client Secret,
+    change user to your Reddit username and password to your Reddit password
+
+3. Run instaReposter.py
+
+  - Navigate to the directory in the terminal
+    run: ```python instaReposter.py```
