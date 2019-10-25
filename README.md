@@ -13,7 +13,7 @@ A bot that grabs the hottest images from reddit (default is r/memes) and reposts
 
 ### **Instructions:**
 
-#### 1. Use Pip to install the required APIs
+#### 1. Use Pip to install the required packages
 
   ##### ***Recommended:***
 
