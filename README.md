@@ -7,7 +7,7 @@ A bot that grabs the hottest images from reddit (default is r/memes) and reposts
 **Pre-Requesites:**
 
 - An Instagram account
-- A Reddit bot account with an [app] (https://old.reddit.com/prefs/apps/) created 
+- A Reddit bot account with an [app](https://old.reddit.com/prefs/apps/) created 
 - Python 3
 
 
@@ -21,7 +21,7 @@ A bot that grabs the hottest images from reddit (default is r/memes) and reposts
 
   **Manual:**
 
-   PRAW ([Reddit API] (https://github.com/praw-dev/praw)):
+   PRAW ([Reddit API](https://github.com/praw-dev/praw)):
       ```pip install praw```
 
    InstagramAPI ([Instagram API](https://github.com/LevPasha/Instagram-API-python)):
