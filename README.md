@@ -17,8 +17,7 @@ A bot that grabs the hottest images from reddit (default is r/memes) and reposts
 
   *Recommended:*
 
-  ```pip install -r requirements.txt
-  ```
+  ```pip install -r requirements.txt```
 
   Manual:
 
