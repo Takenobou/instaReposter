@@ -7,7 +7,7 @@ A bot that grabs the hottest images from reddit (default is r/memes) and reposts
 ### **Pre-Requesites:**
 
 - An Instagram account
-- A Reddit bot account with an [app](https://old.reddit.com/prefs/apps/) created 
+- A Reddit account with an [app](https://old.reddit.com/prefs/apps/) created 
 - Python 3
 
 
