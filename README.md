@@ -15,20 +15,20 @@ A bot that grabs the hottest images from reddit (default is r/memes) and reposts
 
 1. Use Pip to install the required APIs
 
-*Recommended:*
+  *Recommended:*
 
   ```pip install -r requirements.txt```
 
-Manual:
+  Manual:
 
-  PRAW ([Reddit API] (https://github.com/praw-dev/praw)):
-    ```pip install praw```
+    PRAW ([Reddit API] (https://github.com/praw-dev/praw)):
+      ```pip install praw```
 
-  InstagramAPI ([Instagram API](https://github.com/LevPasha/Instagram-API-python)):
-    ```pip install InstagramAPI```
+    InstagramAPI ([Instagram API](https://github.com/LevPasha/Instagram-API-python)):
+      ```pip install InstagramAPI```
 
-  pillow (PIL)
-    ```pip install pillow```
+    pillow (PIL)
+      ```pip install pillow```
 
 2. Login
   - In instaLogin.txt change Username to your Instagram username
