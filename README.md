@@ -11,15 +11,15 @@ A bot that grabs the hottest images from reddit (default is r/memes) and reposts
 - Python 3
 
 
-***Instructions:***
+**Instructions:**
 
 1. Use Pip to install the required APIs
 
-  *Recommended:*
+  ***Recommended:***
 
   ```pip install -r requirements.txt```
 
-  Manual:
+  **Manual:**
 
    PRAW ([Reddit API] (https://github.com/praw-dev/praw)):
       ```pip install praw```
