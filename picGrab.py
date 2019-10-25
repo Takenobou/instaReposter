@@ -2,13 +2,18 @@ import os
 import PIL
 import praw
 import mmap
+import platform
 import requests
 from PIL import Image
+
+if platform.system() == 'Linux':
+    slash = '/'
+elif platform.system() == 'Windows':
+    slash = '\\'
 
 #reddit image grabber and prepper
 
 def main():
-
         clID = ""
         clSE = ""
         User = ""
@@ -21,11 +26,9 @@ def main():
 
         subreddit = reddit.subreddit('memes') #target subreddit
         ImagePath = os.getcwd()
-        #ImagePath = d + "\\Images" #image path
-        hot_python = subreddit.hot(limit= 11) #amount of images to be downloaded (limit + 1 sticky)
 
-        with open("..\\lastimageindex.txt", "a") as file:      
-            file.write("\n\n")
+        indexPath = ".." +slash+ "lastimageindex.txt"
+        hot_python = subreddit.hot(limit= 11) #amount of images to be downloaded (limit + 1 sticky)
 
         for submission in hot_python:
             if not submission.stickied and not submission.over_18:
@@ -42,7 +45,7 @@ def main():
 
                 burl = str.encode(url)
                 #reading
-                with open("..\\lastimageindex.txt", "rb", 0) as file, \
+                with open(indexPath, "rb", 0) as file, \
                     mmap.mmap(file.fileno(), 0, access=mmap.ACCESS_READ) as s:
                     if s.find(burl) != -1:
                         print('Image already posted')
@@ -50,38 +53,35 @@ def main():
                     else:
                         print('New Image')
                         newImage = True
-                        with open(ImagePath + "\\" + imageName + '.jpg', 'wb') as handler: #writing the image
+                        with open(ImagePath + slash + imageName + '.jpg', 'wb') as handler: #writing the image
                             handler.write(img_data)
 
                         #prepping the image for instagram
-                        with Image.open(ImagePath + "\\" + imageName + '.jpg') as img:
+                        with Image.open(ImagePath + slash + imageName + '.jpg') as img:
                             Oimg_w, Oimg_h = img.size # original image dimensions
                             imgRatio = Oimg_w / Oimg_h
                         if  imgRatio <= 1 :
                             #portrait
                             imagePrep(1, imageName)
-                        elif imgRatio >= 1.1:
+                        elif imgRatio > 1:
                             #Landscape
                             imagePrep(2, imageName)
-                        elif imgRatio > 1 and imgRatio < 1.1:
-                            #Square
-                            imagePrep(3, imageName)
 
                 #appending
                 if newImage == True:
-                    with open("..\\lastimageindex.txt", "a") as file:      
+                    with open(indexPath, "a") as file:      
                         file.write(url + "\n")
         
         # delete old values
-        with open("..\\lastimageindex.txt", 'rt') as lines:
+        with open(indexPath, 'rt') as lines:
             # while the line is not empty drop it
             for line in lines:
                 if not line.strip():
                     break
         
-            with open("..\\lastimageindex.txt", 'wt') as out:
+            with open(indexPath, 'wt') as out:
                 out.writelines(lines)
-
+        
 def imagePrep(imageType, imageName):
     
     ImagePath = os.getcwd()
@@ -91,12 +91,9 @@ def imagePrep(imageType, imageName):
     elif imageType == 2:
         baseheight = 608
         backwidth = 1080
-    elif imageType == 3:
-        baseheight = 1080
-        backwidth = 1080
     #resizing
     
-    img = Image.open(ImagePath + "\\" + imageName + '.jpg')
+    img = Image.open(ImagePath + slash + imageName + '.jpg')
     hpercent = (baseheight / float(img.size[1]))
     wsize = int((float(img.size[0]) * float(hpercent)))
     img = img.resize((wsize, baseheight), PIL.Image.ANTIALIAS)
@@ -109,7 +106,7 @@ def imagePrep(imageType, imageName):
 
     #composing final image
     background.paste(img, offset)
-    background.save(ImagePath + "\\" + imageName + '.jpg')
+    background.save(ImagePath + slash + imageName + '.jpg')
 
 if __name__ == "__main__":
     print("PicGrab imported")

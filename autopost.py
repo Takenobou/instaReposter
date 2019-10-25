@@ -1,6 +1,7 @@
 import os
 import sys
 import time
+import platform
 import instaReposter
 from os import listdir
 from os.path import isfile, join
@@ -8,7 +9,12 @@ from random import randint
 from InstagramAPI import InstagramAPI
 
 d = os.getcwd()
-ImagePath = d + "\\Images"
+if platform.system() == 'Linux':
+    slash = '/'
+elif platform.system() == 'Windows':
+    slash = '\\'
+
+ImagePath = d + slash + "Images"
 hashtags = "#meme #memes #dankmemes #funny #funnymemes #memesdaily #lol #edgymemes #dank #offensivememes #lmao #follow #like #bhfyp #humor #dankmeme #reddit #edgy #comedy #fun #instagram #cringe #offensive #sad #memestagram"
 
 def main():  
@@ -19,7 +25,6 @@ def main():
         postIt()
 
 def instaLogin():
-
         os.chdir("..")
         f = open("instaLogin.txt", "r")
         igUser = f.readline()
@@ -31,7 +36,7 @@ def instaLogin():
         return igapi
 
 def postIt():
-        igapi = instaLogin()    
+        igapi = instaLogin()
         try:
                 while True:
                         os.chdir(ImagePath)
@@ -54,13 +59,13 @@ def postIt():
                                 #image grab
                                 instaReposter.multiProcessor(2)
                                 time.sleep(10)
-
+                                       
         except KeyboardInterrupt:
                 print("\nProgram interrupted")
-                pass          
+                pass            
 
 def timer():
-    n = randint(1800, 3600)
+    n = randint(2400, 3600)
     for remaining in range(n, 0, -1):
         print("----------------------------------------------------------")
         sys.stdout.write("\r")
@@ -69,8 +74,12 @@ def timer():
 
         time.sleep(1)
         #comment for debugging
-        clear = lambda: os.system('cls')
+        if platform.system() == 'Linux':
+            clear = lambda: os.system('clear')
+        elif platform.system() == 'Windows':
+            clear = lambda: os.system('cls')
         clear() 
         
+
 if __name__ == "__main__":
     print ("Autopost imported")

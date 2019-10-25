@@ -1,23 +1,34 @@
 import os
-import sys
 import time
 import picGrab
 import autopost
+import platform
 from multiprocessing import Process
 
-dir = os.getcwd()
-ImagePath = dir + "\\Images"
 def ensure_dir():
-        if not os.path.isdir(ImagePath):
-                print("Creating image folder")
-                os.makedirs(ImagePath)
+    dir = os.getcwd()
+    if platform.system() == 'Linux':
+        ImagePath = dir + "/Images"
+        IndexFile = dir + "/lastimageindex.txt"
+    elif platform.system() == 'Windows':
+        ImagePath = dir + "\\Images"
+        IndexFile = dir + "\\lastimageindex.txt"
 
-def multiProcessor( processMode ):
+    if not os.path.isdir(ImagePath):
+        print("Creating image folder")
+        os.makedirs(ImagePath)
+    if not os.path.exists(IndexFile):
+        with open(IndexFile, 'w') as f:
+            f.write("URL Codes for Images") 
 
+
+def multiProcessor(processMode):
     if processMode == 1:
         Process(target=InstaPoster).start()
+        #InstaPoster()
     elif processMode == 2:
         Process(target=RedditImageGrab).start()
+        #RedditImageGrab()
 
 # Instagram poster script
 def InstaPoster():
@@ -26,15 +37,9 @@ def InstaPoster():
 
 #Image grabber and file sorter
 def RedditImageGrab():
-    #while True:
-        #dirContents = os.listdir(ImagePath)
-        #if len(dirContents) == 0:
     print('Image folder is empty, repopulating now')
-    #start_time = time.time()
-    picGrab.main()
-    #elapsed_time = time.time() - start_time      
-    print("Image folder repopulated")
-    #print("The update took " + str(elapsed_time) + "s")
+    picGrab.main()     
+    print("Image folder repopulated")      
 
 #multiprocessing the functions
 if __name__ == '__main__':
