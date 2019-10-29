@@ -21,7 +21,6 @@ def ensure_dir():
         with open(IndexFile, 'w') as f:
             f.write("URL Codes for Images") 
 
-
 def multiProcessor(processMode):
     if processMode == 1:
         Process(target=InstaPoster).start()

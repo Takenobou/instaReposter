@@ -28,7 +28,7 @@ def main():
         ImagePath = os.getcwd()
 
         indexPath = ".." +slash+ "lastimageindex.txt"
-        hot_python = subreddit.hot(limit= 11) #amount of images to be downloaded (limit + 1 sticky)
+        hot_python = subreddit.hot(limit= 6) #amount of images to be downloaded (limit + 1 sticky)
 
         for submission in hot_python:
             if not submission.stickied and not submission.over_18:
@@ -37,13 +37,11 @@ def main():
                 imageName = str(submission.author)
                 print (imageName)
                 img_data = requests.get(url).content
-         
-#checking if the image has been posted before
-                
                 url = url[18:]
                 url = url[:-4] 
-
                 burl = str.encode(url)
+         
+#checking if the image has been posted before
                 #reading
                 with open(indexPath, "rb", 0) as file, \
                     mmap.mmap(file.fileno(), 0, access=mmap.ACCESS_READ) as s:
@@ -60,27 +58,33 @@ def main():
                         with Image.open(ImagePath + slash + imageName + '.jpg') as img:
                             Oimg_w, Oimg_h = img.size # original image dimensions
                             imgRatio = Oimg_w / Oimg_h
-                        if  imgRatio <= 1 :
+                        if  imgRatio < 1 :
                             #portrait
                             imagePrep(1, imageName)
                         elif imgRatio > 1:
                             #Landscape
                             imagePrep(2, imageName)
+                        elif imgRatio == 1:
+                            #Square
+                            imagePrep(3, imageName)
 
+
+                        image = Image.open(ImagePath + slash + imageName + '.jpg')
+                        image.save(ImagePath + slash + imageName + '.jpg')
                 #appending
                 if newImage == True:
                     with open(indexPath, "a") as file:      
                         file.write(url + "\n")
         
         # delete old values
-        with open(indexPath, 'rt') as lines:
+        #with open(indexPath, 'rt') as lines:
             # while the line is not empty drop it
-            for line in lines:
-                if not line.strip():
-                    break
+            #for line in lines:
+                #if not line.strip():
+                    #break
         
-            with open(indexPath, 'wt') as out:
-                out.writelines(lines)
+            #with open(indexPath, 'wt') as out:
+            #    out.writelines(lines)
         
 def imagePrep(imageType, imageName):
     
@@ -90,6 +94,9 @@ def imagePrep(imageType, imageName):
         backwidth = 1080
     elif imageType == 2:
         baseheight = 608
+        backwidth = 1080
+    elif imageType == 3:
+        baseheight = 1080
         backwidth = 1080
     #resizing
     

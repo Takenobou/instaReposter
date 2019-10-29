@@ -3,6 +3,7 @@ import sys
 import time
 import platform
 import instaReposter
+from PIL import Image
 from os import listdir
 from os.path import isfile, join
 from random import randint
@@ -18,14 +19,10 @@ ImagePath = d + slash + "Images"
 hashtags = "#meme #memes #dankmemes #funny #funnymemes #memesdaily #lol #edgymemes #dank #offensivememes #lmao #follow #like #bhfyp #humor #dankmeme #reddit #edgy #comedy #fun #instagram #cringe #offensive #sad #memestagram"
 
 def main():  
-        os.chdir(ImagePath)
-        ListFiles = sorted([f for f in listdir(ImagePath) if isfile(join(ImagePath, f))])
-        print(ListFiles)
-        print("Total number of photos in this folder:" + str(len(ListFiles)))
         postIt()
 
 def instaLogin():
-        os.chdir("..")
+        #os.chdir("..")
         f = open("instaLogin.txt", "r")
         igUser = f.readline()
         igPassword = f.readline()
@@ -52,7 +49,10 @@ def postIt():
                                         credit = os.path.splitext(photo)[0]
                                         IGCaption = ("Originally posted by: /u/" + credit + " on Reddit" ".\n.\n.\n.\n.\n.\n.\n.\nTags:\n\n" + hashtags)
                                         print("Now uploading this photo to Instagram: " + photo)
+                                        image = Image.open(photo)
+                                        image.save(photo)
                                         igapi.uploadPhoto(photo, caption=IGCaption, upload_id=None)
+                                        print("Upload Successful")
                                         os.remove(photo)
                                         timer()
                         elif len(listdir(ImagePath)) == 0:
@@ -65,20 +65,20 @@ def postIt():
                 pass            
 
 def timer():
-    n = randint(2400, 3600)
-    for remaining in range(n, 0, -1):
-        print("----------------------------------------------------------")
-        sys.stdout.write("\r")
-        sys.stdout.write("{:2d} seconds remaining to next upload.".format(remaining))
-        sys.stdout.flush()
-
-        time.sleep(1)
         #comment for debugging
         if platform.system() == 'Linux':
             clear = lambda: os.system('clear')
         elif platform.system() == 'Windows':
             clear = lambda: os.system('cls')
         clear() 
+        n = randint(2400, 3600)
+        print("----------------------------------------------------------")  
+        for remaining in range(n, 0, -1):
+                print("{:2d} seconds remaining to next upload.".format(remaining))
+                CURSOR_UP_ONE = '\x1b[1A'
+                ERASE_LINE = '\x1b[2K'
+                time.sleep(1)
+                print(CURSOR_UP_ONE + ERASE_LINE + CURSOR_UP_ONE)
         
 
 if __name__ == "__main__":
