@@ -12,7 +12,6 @@ elif platform.system() == 'Windows':
     slash = '\\'
 
 #reddit image grabber and prepper
-
 def main():
         clID = ""
         clSE = ""
@@ -26,9 +25,8 @@ def main():
 
         subreddit = reddit.subreddit('memes') #target subreddit
         ImagePath = os.getcwd()
-
         indexPath = ".." +slash+ "lastimageindex.txt"
-        hot_python = subreddit.hot(limit= 6) #amount of images to be downloaded (limit + 1 sticky)
+        hot_python = subreddit.hot(limit= 6) #amount of images to be downloaded (check for sticky posts)
 
         for submission in hot_python:
             if not submission.stickied and not submission.over_18:
@@ -68,23 +66,12 @@ def main():
                             #Square
                             imagePrep(3, imageName)
 
-
                         image = Image.open(ImagePath + slash + imageName + '.jpg')
                         image.save(ImagePath + slash + imageName + '.jpg')
                 #appending
                 if newImage == True:
                     with open(indexPath, "a") as file:      
                         file.write(url + "\n")
-        
-        # delete old values
-        #with open(indexPath, 'rt') as lines:
-            # while the line is not empty drop it
-            #for line in lines:
-                #if not line.strip():
-                    #break
-        
-            #with open(indexPath, 'wt') as out:
-            #    out.writelines(lines)
         
 def imagePrep(imageType, imageName):
     
