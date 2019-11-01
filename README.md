@@ -31,7 +31,7 @@ A bot that grabs the hottest images from reddit (default is r/memes) and reposts
     `pip install pillow`
 
 #### 2. Login
-  - In instaLogin.txt change Username to your Instagram username and Password to you Instagram password
+  - In instaLogin.txt change Username to your Instagram username and Password to your Instagram password
   - In picGrab.py change clID to your app client ID, clSE to your client Secret,
     change user to your Reddit username and password to your Reddit password
 
