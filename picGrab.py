@@ -41,37 +41,37 @@ def main(grabAmount, ImagePath, IndexPath, TargetSub):
             burl = str.encode(url)
          
 #checking if the image has been posted before
-                #reading
-        with open(IndexPath, "rb", 0) as file, \
-            mmap.mmap(file.fileno(), 0, access=mmap.ACCESS_READ) as s:
-            if s.find(burl) != -1:
-                print('Image already posted')
-            else:
-                print('New Image')
-                with open(ImagePath + slash + imageName + '.jpg', 'wb') as handler: #writing the image
-                    handler.write(img_data)
+            #reading
+            with open(IndexPath, "rb", 0) as file, \
+                mmap.mmap(file.fileno(), 0, access=mmap.ACCESS_READ) as s:
+                if s.find(burl) != -1:
+                    print('Image already posted')
+                else:
+                    print('New Image')
+                    with open(ImagePath + slash + imageName + '.jpg', 'wb') as handler: #writing the image
+                        handler.write(img_data)
 
-                #prepping the image for instagram
-                with Image.open(ImagePath + slash + imageName + '.jpg') as img:
-                    Oimg_w, Oimg_h = img.size # original image dimensions
-                    imgRatio = Oimg_w / Oimg_h #rough ratio
-                    if  imgRatio < 1 :
-                        #portrait
-                        imagePrep(1, imageName, Oimg_h, ImagePath)
-                    elif imgRatio > 1:
-                        #Landscape
-                        imagePrep(2, imageName, Oimg_h, ImagePath)
-                    elif imgRatio == 1:
-                        #Square
-                        imagePrep(3, imageName, Oimg_h, ImagePath)
+                    #prepping the image for instagram
+                    with Image.open(ImagePath + slash + imageName + '.jpg') as img:
+                        Oimg_w, Oimg_h = img.size # original image dimensions
+                        imgRatio = Oimg_w / Oimg_h #rough ratio
+                        if  imgRatio < 1 :
+                            #portrait
+                            imagePrep(1, imageName, Oimg_h, ImagePath)
+                        elif imgRatio > 1:
+                            #Landscape
+                            imagePrep(2, imageName, Oimg_h, ImagePath)
+                        elif imgRatio == 1:
+                            #Square
+                            imagePrep(3, imageName, Oimg_h, ImagePath)
                         
-                    #removing EXIF data
-                    image = Image.open(ImagePath + slash + imageName + '.jpg')
-                    image.save(ImagePath + slash + imageName + '.jpg')
+                        #removing EXIF data
+                        image = Image.open(ImagePath + slash + imageName + '.jpg')
+                        image.save(ImagePath + slash + imageName + '.jpg')
                         
-                #appending
-                with open(IndexPath, "a") as file:      
-                    file.write(url + "\n")
+                    #appending
+                    with open(IndexPath, "a") as file:      
+                        file.write(url + "\n")
         
 def imagePrep(imageType, imageName, Oimg_h, ImagePath):
     if imageType == 1:
