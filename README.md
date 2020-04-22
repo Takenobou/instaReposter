@@ -1,5 +1,7 @@
 # instaReposter
 
+## Dead, Instagram has closed the endpoint for uploading images to the public so this won't work. 
+
 ### Support for Linux and Windows
 
 A bot that grabs the hottest images from reddit (default is r/memes) and reposts them to instagram (in a random 30-60min interval)
